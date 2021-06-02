@@ -1,0 +1,84 @@
+<app-header *ngIf="showHeader"></app-header> <br /><br /><br /><br />
+<!-- <p>{{ product.productName }}</p> -->
+<div class="main" style="margin-top: -30px">
+  <div class="form-group has-search">
+    <span class="fa fa-search form-control-feedback"></span>
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Search"
+      [(ngModel)]="searchText"
+      (ngModelChange)="search($event)"
+    />
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div *ngFor="let product of products" class="col-md-3 thumbnail">
+      <div class="card">
+        <a (click)="viewProduct(product)">
+          <img
+            [src]="product.productImageUrl"
+            alt="watch"
+            width="100px"
+            height="200px"
+          />
+          <div class="card-body">
+            <p class="card-text">{{ product.productName }}</p>
+          </div>
+        </a>
+      </div>
+
+      <!--
+        <img
+          [src]="product.productImageUrl"
+          alt="watch"
+          width="100px"
+          height="200px"
+        />
+        <div class="caption">
+          <p>{{ product.productName }}</p>
+        </div> -->
+      <!-- </a> -->
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="productModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLongTitle"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Product Details</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <app-product-details
+          *ngIf="product"
+          [product]="product"
+        ></app-product-details>
+      </div>
+      <div class="modal-footer" *ngIf="showHeader">
+        <button type="button" class="btn btn-dark" data-dismiss="modal">
+          <a style="text-decoration: none; color: white" (click)="buy(product)"
+            >Buy</a
+          >
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- <app-footer></app-footer> -->
